@@ -29,14 +29,16 @@ Plug 'honza/vim-snippets'
 
 " file browser
 Plug 'scrooloose/nerdtree'
-nnoremap <silent> <F5> :NERDTreeTabsToggle<CR>
+" nnoremap <silent> <F5> :NERDTreeTabsToggle<CR>
+nnoremap <leader>t :NERDTreeTabsToggle<CR>
 " NERDTress File highlighting
+let NERDTreeIgnore=['\.o$']
 
 Plug 'jistr/vim-nerdtree-tabs'
 
 " c++/python source overview
 Plug 'majutsushi/tagbar'
-nnoremap <silent> <F6> :TagbarToggle<CR>
+nnoremap <leader>y :TagbarToggle<CR>
 
 Plug 'tomtom/tlib_vim'
 Plug 'vim-pandoc/vim-pandoc'
@@ -48,17 +50,25 @@ let g:pandoc_no_folding = 1
 "Plug 'Kocha/vim-systemc'
 
 "vim with lldb
-Plug 'gilligan/vim-lldb'
-let g:lldb_map_Lframe = "<leader>f"
+"Plug 'gilligan/vim-lldb'
+"let g:lldb_map_Lframe = "<leader>f"
 
 "Git wrapper
 Plug 'tpope/vim-fugitive'
+set diffopt+=vertical
+nnoremap <leader>gs :Gstatus<cr>
+nnoremap <leader>gc :Gcommit -s<cr>
+
+
+
+"fugitive extension
+Plug 'junegunn/gv.vim'
 
 "Latex
 Plug 'gerw/vim-latex-suite'
 
 "Scala
-Plug 'derekwyatt/vim-scala'
+"Plug 'derekwyatt/vim-scala'
 
 "
 Plug 'terryma/vim-multiple-cursors'
@@ -95,8 +105,8 @@ call plug#end()
 
 "Vimscript file settings ---------------------- {{{
 augroup filetype_vim
-	autocmd!
-	autocmd FileType vim setlocal foldmethod=marker
+    autocmd!
+    autocmd FileType vim setlocal foldmethod=marker
 augroup END
 " }}}
 
@@ -108,21 +118,24 @@ set nu
 set hlsearch
 set tabstop=4
 set shiftwidth=4
-set ai
+set autoindent
 set backspace=indent,eol,start
 set ruler
-set mouse=a
+set noexpandtab
+"set mouse=a
 
 
 "Specific file type setting
-au BufRead,BufNewFile *.cpp,*.hpp set cin ai et nu sw=2 ts=2 
+au BufRead,BufNewFile *.cpp,*.hpp set cin ai nu sw=2 ts=2 
 au BufRead,BufNewFile *.v set cin ai et nu sw=2 ts=2
-au BufRead,BufNewFile *.c,*.h set cin ai et nu sw=2 ts=2
+au BufRead,BufNewFile *.c,*.h set cin ai nu sw=8 ts=8 noexpandtab
 au BufRead,BufNewFile *.py set ai et nu sw=4 ts=4 tw=80 
+au BufRead,BufNewFile *.pl set ai et nu sw=4 ts=4 tw=80 
 au BufRead,BufNewFile *.hs set ai et nu sw=4 ts=4 tw=80 
 au BufRead,BufNewFile *.sc set ai et nu sw=4 ts=4 tw=80 filetype=scala
 au BufRead,BufNewFile *.rst set ai et nu sw=4 ts=4 tw=80 spell
 au BufRead,BufNewFile *.tex set ai et nu sw=4 ts=4 tw=80 spell
+au BufRead,BufNewFile *.exp set filetype=tcl sw=8 ts=8 noexpandtab
 
 
 "Edit and source vimrc
@@ -158,24 +171,48 @@ nnoremap <leader>n :setlocal number!<cr>
 "Toggle paste mode
 nnoremap <leader>p :setlocal paste!<cr>
 
+"Orgnize code
+nnoremap <leader>o <ESC>gg=G<C-o><C-o>
 
-"use \tl to switch to last tab
-let g:lasttab = 1
-nnoremap <Leader>gt :exe "tabn ".g:lasttab<CR>
-au TabLeave * let g:lasttab = tabpagenr()
 
 
 inoremap jk <ESC>
 
-"share clip board
+" share clip board
 set clipboard=unnamed
 
-" Change directory to the current buffer when opening files.
+" change directory to the current buffer when opening files.
 set autochdir
 
 " map esc to exit terminal emulator
 :tnoremap <Esc> <C-\><C-n>
 
 set termguicolors
+set cursorline
 
+
+" turn off highlight
+nnoremap <leader>h :noh<return><esc>
+
+
+" highlight trailing spaces
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+
+
+nnoremap th  :tabfirst<CR>
+nnoremap tk  :tabnext<CR>
+nnoremap tj  :tabprev<CR>
+nnoremap tl  :tablast<CR>
+nnoremap tt  :tabedit<Space>
+nnoremap tn  :tabnext<Space>
+nnoremap tm  :tabm<Space>
+nnoremap td  :tabclose<CR>
+
+" show word count
+nnoremap <leader>wc *<C-O>:%s///gn<CR><C-O>
+
+" diff shortcuts
+nnoremap <leader>dp :diffput<CR>
+nnoremap <leader>dg :diffget<CR>
 
