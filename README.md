@@ -2,7 +2,7 @@ neovim places its configuration under `~/.config/nvim`. So, to use this configur
 clone this repo as follows:
 
 ```
-$ git clong https://github.com/hauhsu/nvim.git ~/.config/nvim
+$ git clone https://github.com/hauhsu/nvim.git ~/.config/nvim
 ```
 
 The config uses [vim-plug](https://github.com/junegunn/vim-plug) as plug-in manager.  
