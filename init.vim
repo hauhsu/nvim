@@ -221,3 +221,15 @@ nnoremap <leader>wc *<C-O>:%s///gn<CR><C-O>
 nnoremap <leader>dp :diffput<CR>
 nnoremap <leader>dg :diffget<CR>
 nnoremap <leader>df :windo diffthis<CR>
+
+
+" show function name in status bar
+fun! ShowFuncName()
+  let lnum = line(".")
+  let col = col(".")
+  echohl ModeMsg
+  echo getline(search("^[^ \t#/]\\{2}.*[^:]\s*$", 'bW'))
+  echohl None
+  call search("\\%" . lnum . "l" . "\\%" . col . "c")
+endfun
+map f :call ShowFuncName() <CR>
