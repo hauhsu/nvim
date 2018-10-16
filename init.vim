@@ -17,6 +17,19 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_filetype_blacklist = {}
 
 
+" Syntaxt check
+Plug 'vim-syntastic/syntastic'
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+nnoremap <leader>sy :SyntasticToggleMode<CR>
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+
 " snippet engine
 Plug 'SirVer/ultisnips'
 let g:UltiSnipsSnippetsDir='~/.vim/snippets'
@@ -95,6 +108,10 @@ Plug 'CodeFalling/fcitx-vim-osx'
 
 Plug '/usr/local/opt/fzf'
 
+" Jenkinsfile
+Plug 'martinda/Jenkinsfile-vim-syntax'
+
+
 " All of your Plugs must be added before the following line
 call plug#end()
 
@@ -129,13 +146,14 @@ set noexpandtab
 au BufRead,BufNewFile *.cpp,*.hpp set cin ai nu sw=2 ts=2 
 au BufRead,BufNewFile *.v set cin ai et nu sw=2 ts=2
 au BufRead,BufNewFile *.c,*.h set cin ai nu sw=8 ts=8 noexpandtab
-au BufRead,BufNewFile *.py set ai et nu sw=4 ts=4 tw=80 
-au BufRead,BufNewFile *.pl set ai et nu sw=4 ts=4 tw=80 
-au BufRead,BufNewFile *.hs set ai et nu sw=4 ts=4 tw=80 
+au BufRead,BufNewFile *.py set ai et nu sw=4 ts=4 tw=80 colorcolumn=80
+au BufRead,BufNewFile *.pl set ai et nu sw=4 ts=4 tw=80
+au BufRead,BufNewFile *.hs set ai et nu sw=4 ts=4 tw=80
 au BufRead,BufNewFile *.sc set ai et nu sw=4 ts=4 tw=80 filetype=scala
 au BufRead,BufNewFile *.rst set ai et nu sw=4 ts=4 tw=80 spell
 au BufRead,BufNewFile *.tex set ai et nu sw=4 ts=4 tw=80 spell
 au BufRead,BufNewFile *.exp set filetype=tcl sw=8 ts=8 noexpandtab
+au BufRead,BufNewFile Jenkinsfile.* set filetype=Jenkinsfile sw=2 ts=2 noexpandtab
 
 
 "Edit and source vimrc
@@ -171,10 +189,14 @@ nnoremap <leader>n :setlocal number!<cr>
 "Toggle paste mode
 nnoremap <leader>p :setlocal paste!<cr>
 
+"Toggle list
+nnoremap <leader>l :setlocal list!<cr>
+
 "Orgnize code
 nnoremap <leader>o <ESC>gg=G<C-o><C-o>
 
-
+" turn off highlight
+nnoremap <leader>h :noh<return><esc>
 
 inoremap jk <ESC>
 
@@ -190,9 +212,6 @@ set autochdir
 set termguicolors
 set cursorline
 
-
-" turn off highlight
-nnoremap <leader>h :noh<return><esc>
 
 
 " highlight trailing spaces
@@ -226,4 +245,5 @@ fun! ShowFuncName()
   echohl None
   call search("\\%" . lnum . "l" . "\\%" . col . "c")
 endfun
-map f :call ShowFuncName() <CR>
+nnoremap <leader>f :call ShowFuncName() <CR>
+
