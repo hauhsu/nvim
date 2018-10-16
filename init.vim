@@ -144,6 +144,7 @@ set noexpandtab
 
 "Specific file type setting
 au BufRead,BufNewFile *.cpp,*.hpp set cin ai nu sw=2 ts=2 
+au BufRead,BufNewFile *.sh set cin ai nu sw=4 ts=4 expandtab
 au BufRead,BufNewFile *.v set cin ai et nu sw=2 ts=2
 au BufRead,BufNewFile *.c,*.h set cin ai nu sw=8 ts=8 noexpandtab
 au BufRead,BufNewFile *.py set ai et nu sw=4 ts=4 tw=80 colorcolumn=80
@@ -234,6 +235,7 @@ nnoremap <leader>wc *<C-O>:%s///gn<CR><C-O>
 " diff shortcuts
 nnoremap <leader>dp :diffput<CR>
 nnoremap <leader>dg :diffget<CR>
+nnoremap <leader>df :windo diffthis<CR>
 
 
 " show function name in status bar
