@@ -42,12 +42,12 @@ Plug 'honza/vim-snippets'
 
 " file browser
 Plug 'scrooloose/nerdtree'
-" nnoremap <silent> <F5> :NERDTreeTabsToggle<CR>
-nnoremap <leader>t :NERDTreeTabsToggle<CR>
-" NERDTress File highlighting
+nnoremap <leader>t :NERDTreeToggle<CR>
+  " open nerdtree in current file dir
+map <Leader>nt :NERDTree %:p:h<CR>
+  " NERDTress File highlighting
 let NERDTreeIgnore=['\.o$']
 
-Plug 'jistr/vim-nerdtree-tabs'
 
 " c++/python source overview
 Plug 'majutsushi/tagbar'
@@ -111,6 +111,8 @@ Plug '/usr/local/opt/fzf'
 " Jenkinsfile
 Plug 'martinda/Jenkinsfile-vim-syntax'
 
+" Arm asm
+Plug 'ARM9/arm-syntax-vim'
 
 " All of your Plugs must be added before the following line
 call plug#end()
@@ -140,21 +142,24 @@ set backspace=indent,eol,start
 set ruler
 set noexpandtab
 "set mouse=a
+"
+set statusline+=%F
 
 
 "Specific file type setting
 au BufRead,BufNewFile *.cpp,*.hpp set cin ai nu sw=2 ts=2 
 au BufRead,BufNewFile *.sh set cin ai nu sw=4 ts=4 expandtab
 au BufRead,BufNewFile *.v set cin ai et nu sw=2 ts=2
-au BufRead,BufNewFile *.c,*.h set cin ai nu sw=8 ts=8 noexpandtab
+au BufRead,BufNewFile *.c,*.h set cin ai nu sw=4 ts=4 noexpandtab
 au BufRead,BufNewFile *.py set ai et nu sw=4 ts=4 tw=80 colorcolumn=80
-au BufRead,BufNewFile *.pl set ai et nu sw=4 ts=4 tw=80
+au BufRead,BufNewFile *.pl set ai et nu sw=2 ts=2 tw=80 expandtab
 au BufRead,BufNewFile *.hs set ai et nu sw=4 ts=4 tw=80
 au BufRead,BufNewFile *.sc set ai et nu sw=4 ts=4 tw=80 filetype=scala
 au BufRead,BufNewFile *.rst set ai et nu sw=4 ts=4 tw=80 spell
 au BufRead,BufNewFile *.tex set ai et nu sw=4 ts=4 tw=80 spell
 au BufRead,BufNewFile *.exp set filetype=tcl sw=8 ts=8 noexpandtab
 au BufRead,BufNewFile Jenkinsfile.* set filetype=Jenkinsfile sw=2 ts=2 noexpandtab
+au BufNewFile,BufRead *.s,*.S set filetype=arm " arm = armv6/7
 
 
 "Edit and source vimrc
