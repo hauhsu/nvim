@@ -110,7 +110,7 @@ Plug 'CodeFalling/fcitx-vim-osx'
 Plug '/usr/local/opt/fzf'
 
 " Jenkinsfile
-Plug 'martinda/Jenkinsfile-vim-syntax'
+"Plug 'martinda/Jenkinsfile-vim-syntax'
 
 " Arm asm
 Plug 'ARM9/arm-syntax-vim'
@@ -146,12 +146,16 @@ set noexpandtab
 "
 set statusline+=%F
 
+syntax enable
+set termguicolors
+set cursorline
+
 
 "Specific file type setting
 au BufRead,BufNewFile *.cpp,*.hpp set cin ai nu sw=2 ts=2 
-au BufRead,BufNewFile *.sh set cin ai nu sw=4 ts=4 expandtab
+au BufRead,BufNewFile *.sh set cin ai nu sw=4 ts=4 expandtab syn=sh
 au BufRead,BufNewFile *.v set cin ai et nu sw=2 ts=2
-au BufRead,BufNewFile *.c,*.h set cin ai nu sw=4 ts=4 noexpandtab
+au BufRead,BufNewFile *.c,*.h set cin ai nu sw=8 ts=8 noexpandtab
 au BufRead,BufNewFile *.py set ai et nu sw=4 ts=4 tw=80 colorcolumn=80
 au BufRead,BufNewFile *.pl set ai et nu sw=2 ts=2 tw=80 expandtab
 au BufRead,BufNewFile *.hs set ai et nu sw=4 ts=4 tw=80
@@ -216,8 +220,6 @@ set autochdir
 " map esc to exit terminal emulator
 :tnoremap <Esc> <C-\><C-n>
 
-set termguicolors
-set cursorline
 
 
 
