@@ -46,7 +46,7 @@ nnoremap <leader>t :NERDTreeToggle<CR>
   " open nerdtree in current file dir
 map <Leader>nt :NERDTree %:p:h<CR>
   " NERDTress File highlighting
-let NERDTreeIgnore=['\.o$']
+let NERDTreeIgnore=['\.o$', '__pycache__' ]
 
 
 " c++/python source overview
@@ -71,6 +71,7 @@ Plug 'tpope/vim-fugitive'
 set diffopt+=vertical
 nnoremap <leader>gs :Gstatus<cr>
 nnoremap <leader>gc :Gcommit -s<cr>
+nnoremap <leader>gb :Gblame<cr>
 
 
 
